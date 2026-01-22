@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dataset Builder - AI Edition</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Trigger Zone -->
+        <div class="navbar-trigger"></div>
+        
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-file-pdf brand-icon"></i>
+                <span class="brand-text">Professional Dataset Builder</span>
+            </div>
+            <div class="nav-stats">
+                <div class="stat-item">
+                    <i class="fas fa-files"></i>
+                    <span id="total-files">0</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-database"></i>
+                    <span id="total-size">0 MB</span>
+                </div>
+                <div class="stat-item processing-status" id="nav-processing-status">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="nav-status-text">Ready</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Professional Dataset Builder</span>
+                    <br>for Machine Learning
+                </h1>
+                <p class="hero-subtitle">Transform your documents into structured datasets with advanced processing and intelligent merging capabilities</p>
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-magic"></i>
+                        <span>AI-Powered</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>Lightning Fast</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tools Grid -->
+            <div class="tools-grid">
+                <!-- PDF to JSON Tool -->
+                <div class="tool-card" id="pdf-to-json-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>PDF to JSON Conversion</h3>
+                            <p>Extract and structure text data for ML training</p>
+                        </div>
+                        <div class="tool-status" id="pdf-json-status">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-content">
+                        <div class="upload-zone" id="pdf-upload-zone">
+                            <input type="file" id="pdf-file-input" multiple accept=".pdf" style="display: none;">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h4>Drop PDF files here</h4>
+                                <p>or <button class="link-btn" id="select-pdf-files-btn">browse files</button></p>
+                                <small>Supports multiple files up to 500MB total</small>
+                            </div>
+                        </div>
+                        
+                        <div id="selected-pdf-files" class="file-list"></div>
+                        
+                        <div class="tool-settings">
+                            <div class="settings-row">
+                                <div class="input-group half-width">
+                                    <label for="output-format">
+                                        <i class="fas fa-cog"></i>
+                                        Output Format
+                                    </label>
+                                    <select id="output-format" class="format-select">
+                                        <option value="json">JSON Dataset</option>
+                                        <option value="txt">Plain Text</option>
+                                        <option value="ton">Token-Oriented Notation</option>
+                                    </select>
+                                </div>
+                                <div class="input-group half-width">
+                                    <label for="json-output-path">
+                                        <i class="fas fa-file-code"></i>
+                                        Output Filename
+                                    </label>
+                                    <input type="text" id="json-output-path" value="dataset.json" placeholder="Enter filename...">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="process-btn" class="btn-primary btn-large">
+                            <i class="fas fa-cogs"></i>
+                            <span>Process & Generate JSON</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PDF Merger Tool -->
+                <div class="tool-card" id="pdf-merger-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-compress-alt"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>PDF Merger</h3>
+                            <p>Combine multiple PDFs into one document</p>
+                        </div>
+                        <div class="tool-status" id="pdf-merge-status">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-content">
+                        <div class="upload-zone" id="pdf-merge-upload-zone">
+                            <input type="file" id="pdf-merge-file-input" multiple accept=".pdf" style="display: none;">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-layer-group"></i>
+                                <h4>Drop PDF files to merge</h4>
+                                <p>or <button class="link-btn" id="select-pdf-merge-files-btn">browse files</button></p>
+                                <small>Files will be merged in order</small>
+                            </div>
+                        </div>
+                        
+                        <div id="selected-pdf-merge-files" class="file-list"></div>
+                        
+                        <div class="tool-settings">
+                            <div class="input-group">
+                                <label for="pdf-output-path">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Output Filename
+                                </label>
+                                <input type="text" id="pdf-output-path" value="merged.pdf" placeholder="Enter filename...">
+                            </div>
+                        </div>
+                        
+                        <button id="merge-pdfs-btn" class="btn-primary btn-large">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <span>Merge PDFs</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- JSON Merger Tool -->
+                <div class="tool-card" id="json-merger-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>JSON Dataset Merger</h3>
+                            <p>Combine multiple JSON datasets efficiently</p>
+                        </div>
+                        <div class="tool-status" id="json-merge-status">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-content">
+                        <div class="upload-zone" id="json-merge-upload-zone">
+                            <input type="file" id="json-merge-file-input" multiple accept=".json" style="display: none;">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-database"></i>
+                                <h4>Drop dataset files here</h4>
+                                <p>or <button class="link-btn" id="select-json-merge-files-btn">browse files</button></p>
+                                <small>Supports JSON, TON formats</small>
+                            </div>
+                        </div>
+                        
+                        <div id="selected-json-merge-files" class="file-list"></div>
+                        
+                        <div class="tool-settings">
+                            <div class="input-group">
+                                <label for="json-merge-output-path">
+                                    <i class="fas fa-file-code"></i>
+                                    Output Filename
+                                </label>
+                                <input type="text" id="json-merge-output-path" value="merged.json" placeholder="Enter filename...">
+                            </div>
+                        </div>
+                        
+                        <button id="merge-json-btn" class="btn-primary btn-large">
+                            <i class="fas fa-sitemap"></i>
+                            <span>Merge Dataset Files</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Panel -->
+            <div class="progress-panel" id="progress-panel" style="display: none;">
+                <div class="progress-header">
+                    <h3>
+                        <i class="fas fa-tasks"></i>
+                        Processing Status
+                    </h3>
+                    <div class="progress-stats">
+                        <span class="progress-percentage">0%</span>
+                    </div>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div id="result-section" class="result-panel hidden">
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="result-info">
+                        <h3>Processing Complete!</h3>
+                        <p id="result-message">Your file has been processed successfully</p>
+                        <div class="auto-download-info">
+                            <i class="fas fa-download"></i>
+                            <span>Download will start automatically...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button id="download-btn" class="btn-success btn-large" style="display: none;">
+                        <i class="fas fa-download"></i>
+                        <span>Download Result</span>
+                    </button>
+                    <button id="new-process-btn" class="btn-secondary">
+                        <i class="fas fa-plus"></i>
+                        <span>Process New Files</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="loading-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <h3>Processing Files</h3>
+                <p id="loading-message">Preparing your files for processing...</p>
+                <div class="loading-progress">
+                    <div class="loading-bar">
+                        <div class="loading-fill"></div>
+                    </div>
+                    <span class="loading-percent">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/csrf.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
